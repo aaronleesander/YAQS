@@ -45,7 +45,7 @@ plt.rcParams.update({
     "lines.linewidth": 3
 })
 
-fig, axes = plt.subplots(3, 3, figsize=(7.2, 4.3))
+fig, axes = plt.subplots(3, 3, figsize=(7.2, 4.4))
 # gs = GridSpec(3, 2, figure=fig)
 # ax1 = fig.add_subplot(gs[:, 0])
 # ax2 = fig.add_subplot(gs[0, 1])
@@ -53,19 +53,20 @@ fig, axes = plt.subplots(3, 3, figsize=(7.2, 4.3))
 # ax4 = fig.add_subplot(gs[2, 1])
 
 L = 10
-
-axes[0, 0].set_title("$\\chi=2$", fontsize=12)
-axes[0, 1].set_title("$\\chi=4$", fontsize=12)
-axes[0, 2].set_title("$\\chi=8$", fontsize=12)
-axes[0, 0].set_ylabel("Site", fontsize=12)
-axes[1, 0].set_ylabel("Site", fontsize=12)
-axes[2, 0].set_ylabel("Site", fontsize=12)
+fontsize = 18
+labelsize = 16
+axes[0, 0].set_title("$\\chi=2$", fontsize=fontsize)
+axes[0, 1].set_title("$\\chi=4$", fontsize=fontsize)
+axes[0, 2].set_title("$\\chi=8$", fontsize=fontsize)
+axes[0, 0].set_ylabel("Site", fontsize=labelsize, labelpad=0.5)
+axes[1, 0].set_ylabel("Site", fontsize=labelsize, labelpad=0.5)
+axes[2, 0].set_ylabel("Site", fontsize=labelsize, labelpad=0.5)
 axes[0, 0].set_yticks([x-0.5 for x in list(range(2,L+2, 2))], range(2,L+2, 2))
 axes[1, 0].set_yticks([x-0.5 for x in list(range(2,L+2, 2))], range(2,L+2, 2))
 axes[2, 0].set_yticks([x-0.5 for x in list(range(2,L+2, 2))], range(2,L+2, 2))
-axes[2, 0].set_xlabel("Time ($Jt$)", fontsize=12)
-axes[2, 1].set_xlabel("Time ($Jt$)", fontsize=12)
-axes[2, 2].set_xlabel("Time ($Jt$)", fontsize=12)
+axes[2, 0].set_xlabel("Time ($Jt$)", fontsize=labelsize)
+axes[2, 1].set_xlabel("Time ($Jt$)", fontsize=labelsize)
+axes[2, 2].set_xlabel("Time ($Jt$)", fontsize=labelsize)
 
 axes[0, 0].set_xticks([])
 axes[0, 1].set_xticks([])
@@ -276,12 +277,12 @@ error_heatmap = np.mean(error_heatmap, axis=0)
 im = axes[2, 2].imshow(error_heatmap, cmap=cmap, aspect='auto', extent=[0, data['sim_params'].T, L, 0], norm=norm)
 
 # Adjust the layout to make room for vertically rotated labels
-fig.subplots_adjust(left=0.1, right=0.875, bottom=0.1, top=0.9, wspace=0.3, hspace=0.3)
+fig.subplots_adjust(left=0.12, right=0.875, bottom=0.11, top=0.91, wspace=0.2, hspace=0.2)
 
 # Add vertical annotations on the left side above the "Site" label
-axes[0, 0].text(-0.4, 0.5, "$N=100$", fontsize=12, transform=axes[0, 0].transAxes, va='center', ha='center', rotation=90)
-axes[1, 0].text(-0.4, 0.5, "$N=1000$", fontsize=12, transform=axes[1, 0].transAxes, va='center', ha='center', rotation=90)
-axes[2, 0].text(-0.4, 0.5, "$N=10000$", fontsize=12, transform=axes[2, 0].transAxes, va='center', ha='center', rotation=90)
+axes[0, 0].text(-0.4, 0.5, "$N=10^{2}$", fontsize=fontsize, transform=axes[0, 0].transAxes, va='center', ha='center', rotation=90)
+axes[1, 0].text(-0.4, 0.5, "$N=10^{3}$", fontsize=fontsize, transform=axes[1, 0].transAxes, va='center', ha='center', rotation=90)
+axes[2, 0].text(-0.4, 0.5, "$N=10^{4}$", fontsize=fontsize, transform=axes[2, 0].transAxes, va='center', ha='center', rotation=90)
 
 # Add "Average" and "Typical" above the vertical labels
 # axes[0, 0].text(-0.75, 0.5, "Average", fontsize=12, transform=axes[0, 0].transAxes, va='center', ha='center', rotation=90)
@@ -290,7 +291,8 @@ axes[2, 0].text(-0.4, 0.5, "$N=10000$", fontsize=12, transform=axes[2, 0].transA
 
 cbar_ax = fig.add_axes([0.9, 0.1, 0.025, 0.75])
 cbar = fig.colorbar(im, cax=cbar_ax)
-cbar.ax.set_title('$\\epsilon$')
+cbar.ax.set_title('$\\epsilon$', fontsize=fontsize)
+cbar.ax.tick_params(labelsize=labelsize)
 
 # Add a dotted line between row 2 and row 3
 # fig_width, fig_height = fig.get_size_inches()
